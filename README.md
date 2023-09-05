@@ -19,7 +19,7 @@ Run `mkvf2img.sh`. This will produce `vf2.img`, a complete FreeBSD 14.0-SNAPSHOT
 Insert the SD card, and power up. On the serial console, when it gets to `Hit any key to stop autoboot:`, hit a key to get to the `StarFive #` prompt. Then enter the following commands to setup and boot the FreeBSD loader:
 
 ```
-fatload mmc 1:1 0x48000000 dtb/starfive/jh7110-starfive-visionfive-2-v1.3b
+fatload mmc 1:1 0x48000000 dtb/starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
 fatload mmc 1:1 0x44000000 efi/boot/bootriscv64.efi
 bootefi 0x44000000 0x48000000
 ```

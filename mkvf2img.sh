@@ -3,9 +3,10 @@
 set -euo pipefail
 
 BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/14.0
-BASE_IMAGE=FreeBSD-14.0-CURRENT-riscv-riscv64-GENERICSD-20230420-f369f10dd812-262341.img
+BASE_IMAGE=FreeBSD-14.0-ALPHA2-riscv-riscv64-GENERICSD-20230818-77013f29d048-264841.img
+#BASE_IMAGE=FreeBSD-14.0-CURRENT-riscv-riscv64-GENERICSD-20230420-f369f10dd812-262341.img
 
-DTB_FILE=jh7110-starfive-visionfive-2-v1.3b
+DTB_FILE=jh7110-starfive-visionfive-2-v1.3b.dtb
 
 # get base image
 if [ ! -f $BASE_IMAGE ] ; then
@@ -34,7 +35,7 @@ mdconfig -d -u 0
 mdconfig -a -t vnode -f efi.img -u 0
 mount_msdosfs /dev/md0 /mnt
 mkdir -p /mnt/dtb/starfive
-cp -v $DTB_FILE /mnt/dtb/starfive/jh7110-starfive-visionfive-2-v1.3b
+cp -v $DTB_FILE /mnt/dtb/starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
 umount /dev/md0
 mdconfig -d -u 0
 
