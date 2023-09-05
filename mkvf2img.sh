@@ -5,7 +5,7 @@ set -euo pipefail
 BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/14.0
 BASE_IMAGE=FreeBSD-14.0-CURRENT-riscv-riscv64-GENERICSD-20230420-f369f10dd812-262341.img
 
-DTB_FILE=jh7110-visionfive-v2.dtb
+DTB_FILE=jh7110-starfive-visionfive-2-v1.3b
 
 # get base image
 if [ ! -f $BASE_IMAGE ] ; then
@@ -14,9 +14,9 @@ if [ ! -f $BASE_IMAGE ] ; then
 fi
 
 # get dtb
-if [ ! -f $DTB_FILE ] ; then
-  curl -LOC - https://github.com/starfive-tech/VisionFive2/releases/download/VF2_v2.5.0/$DTB_FILE
-fi
+#if [ ! -f $DTB_FILE ] ; then
+#  curl -LOC - https://github.com/starfive-tech/VisionFive2/releases/download/VF2_v2.5.0/$DTB_FILE
+#fi
 
 
 # attach the image, so we can extract the partition info
@@ -34,7 +34,7 @@ mdconfig -d -u 0
 mdconfig -a -t vnode -f efi.img -u 0
 mount_msdosfs /dev/md0 /mnt
 mkdir -p /mnt/dtb/starfive
-cp -v $DTB_FILE /mnt/dtb/starfive/starfive_visionfive2.dtb
+cp -v $DTB_FILE /mnt/dtb/starfive/jh7110-starfive-visionfive-2-v1.3b
 umount /dev/md0
 mdconfig -d -u 0
 
