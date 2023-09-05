@@ -46,6 +46,10 @@ mount /dev/md0 /mnt
 
 # make updates
 echo 'root_rw_mount="NO"' >> /mnt/etc/rc.conf
+echo 'mmc_load="YES"' >> /mnt/boot/loader.conf
+echo 'mmcsd_load="YES"' >> /mnt/boot/loader.conf
+echo 'sdhci_load="YES"' >> /mnt/boot/loader.conf
+echo 'sdio_load="YES"' >> /mnt/boot/loader.conf
 rm -f /mnt/etc/fstab
 touch /mnt/etc/fstab
 

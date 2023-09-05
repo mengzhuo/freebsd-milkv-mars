@@ -24,6 +24,8 @@ fatload mmc 1:1 0x44000000 efi/boot/bootriscv64.efi
 bootefi 0x44000000 0x48000000
 ```
 
+Alternatively, instead of the hard-coded addresses above, you can use ```${fdt_addr_r}``` and ```${kernel_addr_r}```, as the OpenBSD instructions recommend.
+
 ### Load the root filesystem and boot the system
 
 When you see the `Hit [Enter] to boot immediately, or any other key for command prompt`, hit a key to get to the `OK` prompt. The enter the following commands to load the root filesystem and boot the system:
@@ -34,13 +36,17 @@ load -t md_image /root.img.uzip
 boot
 ```
 
-(`root.img.uzip` is large, and will take a while to load).
+Notes:
+
+- `root.img.uzip` is large, and will take a while to load (over 10 minutes)
+- If you want to drop straight into the kernel debugger as soon as possible to trace hardware probing, replace the last step with ```boot -d```
 
 At the `mountroot>` prompt:
 
 ```
 ufs:/dev/md0.uzip
 ```
+(Note the ```uzip``` extension, not a ```zip``` extension)
 
 Watch the kernel messages fly by, until finally:
 
