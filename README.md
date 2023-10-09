@@ -19,12 +19,10 @@ Run `mkvf2img.sh`. This will produce `vf2.img`, a complete FreeBSD 14.0-SNAPSHOT
 Insert the SD card, and power up. On the serial console, when it gets to `Hit any key to stop autoboot:`, hit a key to get to the `StarFive #` prompt. Then enter the following commands to setup and boot the FreeBSD loader:
 
 ```
-fatload mmc 1:1 0x48000000 dtb/starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
-fatload mmc 1:1 0x44000000 efi/boot/bootriscv64.efi
-bootefi 0x44000000 0x48000000
+fatload mmc 1:1 ${fdt_addr_r} dtb/starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
+fatload mmc 1:1 ${kernel_addr_r} efi/boot/bootriscv64.efi
+bootefi ${kernel_addr_r} ${fdt_addr_r}
 ```
-
-Alternatively, instead of the hard-coded addresses above, you can use ```${fdt_addr_r}``` and ```${kernel_addr_r}```, as the OpenBSD instructions recommend.
 
 ### Load the root filesystem and boot the system
 
@@ -33,20 +31,20 @@ When you see the `Hit [Enter] to boot immediately, or any other key for command 
 ```
 load geom_uzip
 load -t md_image /root.img.uzip
-boot
+boot -v
 ```
 
 Notes:
 
 - `root.img.uzip` is large, and will take a while to load (over 10 minutes)
-- If you want to drop straight into the kernel debugger as soon as possible to trace hardware probing, replace the last step with ```boot -d```
+- If you want to drop straight into the kernel debugger as soon as possible to trace hardware probing, replace the last step with ```boot -d``` (-v is verbose, which is often useful)
 
 At the `mountroot>` prompt:
 
 ```
 ufs:/dev/md0.uzip
 ```
-(Note the ```uzip``` extension, not a ```zip``` extension)
+Note the ```uzip``` extension, not a ```zip``` extension, and take your time typing this; the mountroot prompt doesn't have working terminal control, so backspacing or using arrow keys will mess up the entry.
 
 Watch the kernel messages fly by, until finally:
 
