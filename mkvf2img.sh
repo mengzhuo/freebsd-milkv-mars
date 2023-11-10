@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/14.0
-BASE_IMAGE=FreeBSD-14.0-ALPHA2-riscv-riscv64-GENERICSD-20230818-77013f29d048-264841.img
-#BASE_IMAGE=FreeBSD-14.0-CURRENT-riscv-riscv64-GENERICSD-20230420-f369f10dd812-262341.img
+BASE_URL=https://download.freebsd.org/snapshots/riscv/riscv64/ISO-IMAGES/15.0
+BASE_IMAGE=FreeBSD-15.0-CURRENT-riscv-riscv64-GENERICSD-20231102-559a218c9b25-266202.img
+#BASE_IMAGE=FreeBSD-15.0-CURRENT-riscv-riscv64-GENERICSD-20231102-559a218c9b25-266202.img.xz
 
 DTB_FILE=jh7110-starfive-visionfive-2-v1.3b.dtb
 
